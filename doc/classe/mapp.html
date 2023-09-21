@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link rel="stylesheet" href="../style.css">
+        <meta charset="utf-8">
+        <title>MLib - MApp</title>
+    </head>
+    <body>
+        <h1>MApp</h1>
+        <div>
+            MApp est la classe permettant de définir la fenêtre principale de l'interface graphique. Elle hérite de <a href="mwidget.html">mwidget</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+
+        <h2>Fonctions</h2>
+        <h3>__init__()</h3>
+        <div>
+            Paramètres : pygameWindow (assignée à la variable <a href="#_pygameWindow">pygameWindow</a>), windowTitle (assignée à la variable <a href="#windowTitle">windowTitle</a>), windowWidth (défini la largeur de la fenêtre), windowHeight (défini la hauteur de la fenêtre), printFps (assignée à la variable <a href="#printFps">printFps</a>)</br>
+            Crée la fenêtre sur lequel effectuer les modifications graphiques.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="frame">frame()</h3>
+        <div>
+            Paramètres : Aucun</br>
+            Effectue toutes les actions de la fenêtre graphique.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="frameEvent">frameEvent()</h3>
+        <div>
+            Paramètres : Aucun</br>
+            Effectue toutes les actions de la fenêtre graphique qui correspondent aux <a href="../base.html#event">évènements</a>.</br>
+            Cette fonction s'occupe aussi d'actualiser le <a href="#deltaTime">deltaTime</a> puis <a href="#fps">fps</a>.</br>
+            Il est FORTEMENT conseillé d'appeler cette fonction au début d'une frame.</br>
+            Modifié à la <a href="../versions.html">version</a> 1.3.0.
+        </div>
+        <h3 id="frameGraphics">frameGraphics()</h3>
+        <div>
+            Paramètres : Aucun</br>
+            Effectue toutes les actions de la fenêtre graphique qui correspondent aux graphismes.</br>
+            Il est FORTEMENT conseillé d'appeler cette fonction à la fin d'une frame.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="getDeltaTime">getDeltaTime()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne <a href="#deltaTime">deltaTime</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="getFps">getFps()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne <a href="#fps">fps</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="getPressedKey">getPressedKey()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne <a href="pressedKey">pressedKey</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="getPrintFps">getPrintFps()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne <a href="#printFps">printFps</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="getWidgets">getWidgets()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne <a href="#_widgets">_widgets</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="isKeyPressed">isKeyPressed()</h3>
+        <div>
+            Paramètres : key (touche à vérifier)</br>
+            Retourne si la touche "key" est pressé (si elle est dans <a href="pressedKey">pressedKey</a>).</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="setPrintFps">setPrintFps()</h3>
+        <div>
+            Paramètres : printFps (nouvelle valeur de <a href="#printFps">printFps</a>)</br>
+            Change la valeur de <a href="#printFps">printFps</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="setWindowTitle">setWindowTitle()</h3>
+        <div>
+            Paramètres : windowTitle (nouveau titre de la fenêtre)</br>
+            Change le <a href="#windowTitle">titre</a> de la fenêtre.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_containsWidget">_containsWidget</h3>
+        <div>
+            Paramètres : widget (widget à chercher)</br>
+            Retourne si le "widget" est contenu dans <a href="#_widgets">_widgets</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_declaringWidget">_declaringWidget()</h3>
+        <div>
+            Paramètres : widget (widget à enregistrer)</br>
+            Fonction permettant d'enregistrer un widget nouvellement crée dans <a href="#_widgets">_widgets</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+
+        <h2>Variables</h2>
+        <h3 id = "cursorOnOnverflight">cursorOnOnverflight</h3>
+        <div>
+            Même variable que pour le <a href="./mwidget.html">mwidget</a>.</br>
+            La particularité de ce curseur est que celui là représente le curseur de base de l'interface graphique.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "deltaTime">deltaTime</h3>
+        <div>
+            Temps entre la dernière <a href="#frameEvent">frame évènement</a> et la <a href="#frameEvent">frame évènement</a> actuel.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "focusedWidget">focusedWidget</h3>
+        <div>
+            Widget focus par l'utilisateur (quand l'utilisateur click dessus).</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "fps">fps</h3>
+        <div>
+            Nombre de frames par secondes.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "pressedKey">pressedKey</h3>
+        <div>
+            Liste des touches pressées pendant la frame.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "printFps">fps</h3>
+        <div>
+            Booléen qui détermine si le MApp print le nombre de FPS à chaque updates de <a href="#fps">fps</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "windowTitle">windowTitle</h3>
+        <div>
+            Texte affiché en haut de la fenêtre graphique.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_deltaTimeCache">deltaTime</h3>
+        <div>
+            Variable cacher pour permettre d'actualiser <a href="#deltaTime">deltaTime</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_fpsCount">fpsCount</h3>
+        <div>
+            Nombre de frames depuis la dernière update de <a href="#fps">fps</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_fpsDuration">fpsDuration</h3>
+        <div>
+            Nombre de secondes depuis la dernière update de <a href="#fps">fps</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_modifiedWidget">_modifiedWidget</h3>
+        <div>
+            Liste de tous les widgets modifiés à la dernière frame dans <a href="#frameEvent">frameEvent</a> pour leur appliquer <a href="./mwidget.html#resetWidget">resetWidget()</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_pygameWindow">pygameWindow</h3>
+        <div>
+            Fenêtre pygame de base ou effectuer les modifications.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id = "_widgets">_widgets</h3>
+        <div>
+            Liste de tous les widgets présents dans le MApp.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+    </body>
+</html>
