@@ -8,16 +8,16 @@
     <body>
         <h1>MWidget</h1>
         <div>
-            MWidget est la classe principale pour définir un <a href="base.html">widget</a>.</br>
+            MWidget est la classe principale primaire pour définir un <a href="../base.html">widget</a>.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
 
         <h2>Fonctions</h2>
         <h3 id = "__init__">__init__()</h3>
         <div>
-            Paramètres : x (assignée à la variabe <a href="#x">x</a>), y (assignée à la variabe <a href="#y">y</a>), width (assignée à la variable <a href="#width">width</a>), height (assignée à la variable <a href="#height">height</a>), parent (assignée à la variable <a href="#parent">parent</a>), widgetType (assignée à la variable <a href="_type">_type</a>, basiquememnt mit à "MWidget")</br>
+            Paramètres : x (assignée à la variabe <a href="#x">x</a>), y (assignée à la variabe <a href="#y">y</a>), width (assignée à la variable <a href="#width">width</a>), height (assignée à la variable <a href="#height">height</a>), parent (assignée à la variable <a href="#parent">parent</a>), widgetType (assignée à la variable <a href="#_type">_type</a>, basiquememnt mit à "MWidget")</br>
             Construit un objet widget.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Modifié à la <a href="../versions.html">version</a> 2.0.0.
         </div>
         <h3 id="absolutePos">absolutePos()</h3>
         <div>
@@ -139,6 +139,19 @@
             Retourne si les coordonnées "pos" se situent dans le widget grâce à <a href="#absolutePos">"absolutePos"</a>.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
+        <h3 id="promoveChild">promoveChild()</h3>
+        <div>
+            Paramètres : child (enfant à privilégier)</br>
+            Place child en haut de la liste de widget à render pour le render sur tous les autres.</br>
+            Ajouté à la <a href="../versions.html">version</a> 2.0.0.
+        </div>
+        <h3 id = "resetWidget">resetWidget()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Reset le widget à son état initial (si aucun <a href="../base.html#event">évènements</a> ne le modifie).</br>
+            Pour cela, la fonction utiliser toutes les variables (constantes) qui s'appellent "_NOMDUNEVARIABLE", comme <a href="#_BACKGROUNDCOLOR">_BACKGROUNDCOLOR</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
         <h3 id="resize">resize()</h3>
         <div>
             Paramètres : newWidth (nouvelle largeur du widget), newHeight (nouvelle hauteur du widget)</br>
@@ -156,13 +169,6 @@
         <div>
             Paramètres : cursorOnOverflight (nouveau curseur de survol)</br>
             Change le curseur de survol <a href="cursorOnOverflight">"cursorOnOverflight"</a> en cursorOnOverflight.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
-        </div>
-        <h3 id = "resetWidget">resetWidget()</h3>
-        <div>
-            Paramètres : aucun</br>
-            Reset le widget à son état initial (si aucun <a href="../base.html#event">évènements</a> ne le modifie).</br>
-            Pour cela, la fonction utiliser toutes les variables (constantes) qui s'appellent "_NOMDUNEVARIABLE", comme <a href="#_BACKGROUNDCOLOR">_BACKGROUNDCOLOR</a>.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
         <h3 id="setHeight">setHeight()</h3>
@@ -243,7 +249,7 @@
         </div>
         <h3 id = "_isGettingOverflighted">_isGettingOverflighted()</h3>
         <div>
-            Paramètres : aucun</br>
+            Paramètres : relativePos (position relative au widget du curseur de la souris)</br>
             Fonction appelé lorsque le widget est survolé.</br>
             Fonction dédiée à l'héritage et à la réimplentation qui est appelé par <a href="./mapp.html#frameEvent">MApp</a>.</br>
             La fonction est concue pour que les modifications ne sont valables qu'une frame, il est donc conseillé, en cas d'utilisation de fonction "setQuelqueChose" de passer "False" comme second paramètre.</br>
@@ -274,6 +280,14 @@
             La fonction est concue pour que les modifications ne sont valables qu'une frame, il est donc conseillé, en cas d'utilisation de fonction "setQuelqueChose" de passer "False" comme second paramètre.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
+        <h3 id = "_isNotOverflightedAnymore">_isNotOverflightedAnymore()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Fonction appelé lorsque le widget n'est plus survolé par le curseur.</br>
+            Fonction dédiée à l'héritage et à la réimplentation qui est appelé par <a href="./mapp.html#frameEvent">MApp</a>.</br>
+            La fonction est concue pour que les modifications ne sont valables qu'une frame, il est donc conseillé, en cas d'utilisation de fonction "setQuelqueChose" de passer "False" comme second paramètre.</br>
+            Ajouté à la <a href="../versions.html">version</a> 2.0.0.
+        </div>
         <h3 id = "_isTextGettingEntered">_isTextGettingEntered()</h3>
         <div>
             Paramètres : text (texte entrée)</br>
@@ -282,6 +296,13 @@
             La fonction est concue pour que les modifications ne sont valables qu'une frame, il est donc conseillé, en cas d'utilisation de fonction "setQuelqueChose" de passer "False" comme second paramètre.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
+        <h3 id="_lateUpdate">_lateUpdate()</h3>
+        <div>
+            Paramètres : deltaTime (temps passé entre cette frame et la dernière frame)</br>
+            Fonction appelée à chaque frame après le contrôle des éléments.</br>
+            Fonction dédiée à l'héritage et à la réimplentation qui est appelé par <a href="./mapp.html#frameEvent">MApp</a>.</br>
+            Modifié à la <a href="../versions.html">version</a> 2.0.0.
+        </div>
         <h3 id = "_mouseMove">_mouseMove()</h3>
         <div>
             Paramètres : buttons (touches de la souris clické), pos (nouvelle position de la souris), relativeMove (mouvement de la souris)</br>
@@ -289,11 +310,18 @@
             Fonction dédiée à l'héritage et à la réimplentation qui est appelé par <a href="./mapp.html#frameEvent">MApp</a>.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.3.0.
         </div>
+        <h3 id="_mouseWheel">_mouseWheel()</h3>
+        <div>
+            Paramètres : rotation (valeur de la rotation de la molette)</br>
+            Fonction appelé lorsque le widget est focus est que l'utilisateur tourne la molette.</br>
+            Fonction dédiée à l'héritage et à la réimplentation qui est appelé par <a href="./mapp.html#frameEvent">MApp</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
         <h3 id = "_removeChild">_removeChild()</h3>
         <div>
             Paramètres : enfant (widget à supprimer en enfant)</br>
             Supprime l'enfant "enfant" de la liste  d'enfant <a href="#_children">_children</a>.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Modifié à la <a href="../versions.html">version</a> 2.0.0.
         </div>
         <h3 id = "_render">_render()</h3>
         <div>
@@ -329,7 +357,7 @@
         <h3 id = "_update">_update()</h3>
         <div>
             Paramètres : deltaTime (temps passé entre cette frame et la dernière frame)</br>
-            Fonction appelée à chaque frame.</br>
+            Fonction appelée à chaque frame avant le contrôel des évènements.</br>
             Fonction dédiée à l'héritage et à la réimplentation qui est appelé par <a href="./mapp.html#frameEvent">MApp</a>.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
@@ -358,17 +386,17 @@
         </div>
         <h3 id = "mouseDown">mouseDown</h3>
         <div>
-            Nombre qui représente , soit le bouton de la souris par lequel il est clické, soit -1.</br>
+            Liste qui contient tous les boutons de la souris pressés par l'utilisateur sur le widget pendant cette frame.</br>
             Si bouton est "1", la touche clické est la touche gauche, si bouton est "2", la touche clické est la molette, si bouton est "3", la touche clické est la touche droite.</br>
             Si possible, il est conseillé d'utiliser <a href="#_isGettingMouseDown">_isGettingMouseDown</a>.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Modifié à la <a href="../versions.html">version</a> 2.0.0.
         </div>
         <h3 id = "mouseUp">mouseUp</h3>
         <div>
-            Nombre qui représente , soit le bouton de la souris par lequel il n'est plus clické, soit -1.</br>
+            Liste qui contient tous les boutons de la souris plus pressés par l'utilisateur sur le widget pendant cette frame.</br>
             Si bouton est "1", la touche clické est la touche gauche, si bouton est "2", la touche clické est la molette, si bouton est "3", la touche clické est la touche droite.</br>
             Si possible, il est conseillé d'utiliser <a href="#_isGettingMouseUp">_isGettingMouseUp</a>.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Modifié à la <a href="../versions.html">version</a> 2.0.0.
         </div>
         <h3 id = "overflighted">overflighted</h3>
         <div>

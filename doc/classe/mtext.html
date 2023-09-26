@@ -8,12 +8,18 @@
     <body>
         <h1>MText</h1>
         <div>
-            MText est une classe permettant de d'afficher du texte.</br>
+            MText est une classe primaire permettant de d'afficher du texte.</br>
             Elle offre tout ce qui est nécessaire pour :</br>
             -Afficher du texte</br>
             -Permettre à l'utilisateur de modifier et d'entrer le texte</br></br>
             Elle hérite de <a href="./mframe.html">MFrame</a>.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="display">Affichage du texte</h3>
+        <div>
+            Le texte est affiché entre les <a href="./mframe.html">bordure</a> et l'offset. Un système de scroll est possible grâce à <a href="#textX">textX</a> et <a href="textY">textY</a>.
+            On peut scroller sur l'angle vertical avec Ctrl+flèche ou avec la roulette de la souris et sur l'angle horizontal avec Ctrl+roulette de la souris.
+            Il est pour l'instant très déconseillé d'utiliser un alignement et le scrolling en même temps.
         </div>
         <h3>Entrée et modification du texte</h3>
         <div>
@@ -26,8 +32,13 @@
             Il est possible qu'il ne soit pas actif et que la modification de texte le soit, sans que cela pose de gros problème d'utilisations. 
             Or, il est fortement recommandé d'activer le curseur si la selection est active, sauf si vous savez exactement que faire. 
             Il permet de sélectionner une partie de texte et de modifier cette partie. 
-            Le raccourci clavier Ctrl+A permet de sélectionner tout le texte.</br>
+            Le raccourci clavier Ctrl+A permet de sélectionner tout le texte et le combo Flèches+Shift sélectionne avec les flèches.</br>
             De plus, MText permet le copie/collage d'élément dans le texte, avec Ctrl+C, Ctrl+V et Ctrl+X.
+        </div>
+        <h3>Taille de police</h3>
+        <div>
+            Voici un schéma de comparaison des tailles de polices possibles (de 8 à 88) :</br>
+            <img src="../font size comparaison from 8 to 88.png"/>
         </div>
 
         <h2>Fonctions</h2>
@@ -63,9 +74,11 @@
         </div>
         <h3 id="getCuttedText">getCuttedText()</h3>
         <div>
-            Paramètres : generator (générateur de texte)</br>
-            Retourne le texte coupé pour le <a href="#_renderBeforeHierarchy">render</a> et la liste de booléen qui indique si tel ou tel ligne est une découpe du texte ou effectuée par la fonction.</br>
-            Modifié à la <a href="../versions.html">version</a> 1.2.0.
+            Paramètres : all (booléen qui indique si tout le texte est traité, basiquement à True), generator (générateur de texte, basiquement à 0)</br>
+            Retourne le texte coupé pour le <a href="#_renderBeforeHierarchy">render</a>, la liste de booléen qui indique si tel ou tel ligne est une découpe du texte ou effectuée par la fonction et un tuple. Ce tupel contient les coordonnée du texte Y où commence et s'arrête le coupage (utilise si all est False) et la longueur du texte au début du coupage.</br>
+            Si all est égal à True, tout le texte est traité. Sinon, seule la partie présente dans l'<a href="#display">affichage</a> du MText.</br>
+            Si generator est égal à 0, le générateur devient celui de <a href="#getGenerator">getGenerator</a>.</br>
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="getDynamicTextCut">getDynamicTextCut()</h3>
         <div>
@@ -90,6 +103,12 @@
             Paramètres : aucun</br>
             Retourne la <a href="fontSize">taille de police</a> du texte à afficher.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="getGenerator">getGenerator()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne le générateur pygame du MText.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="getInput">getInput()</h3>
         <div>
@@ -167,6 +186,18 @@
             Paramètres : aucun</br>
             Retourne l'<a href="#textVerticalAlignment">alignement</a> vertical du texte.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="getTextX">getTextX()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne la position <a href="#textX">X</a> du texte.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
+        <h3 id="getTextY">getTextY()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne la position <a href="#textY">Y</a> du texte.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="setCursorPosition">setCursorPosition()</h3>
         <div>
@@ -271,7 +302,7 @@
             Change l'<a href="#textHorizontalAlignment">alignement</a> horizontal du texte à "textHorizontalAlignment".</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
-        <h3 id="getTextOffset">getTextOffset()</h3>
+        <h3 id="setTextOffset">setTextOffset()</h3>
         <div>
             Paramètres : textOffset (nouveau décalage du texte), index (numéro de l'offset à retourner, basiquement à 1)</br>
             Change en "textOffset" la valeur de :</br>
@@ -288,6 +319,18 @@
             Change l'<a href="#textVerticalAlignment">alignement</a> vertical du texte à "textVerticalAlignment".</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
+        <h3 id="setTextX">setTextX()</h3>
+        <div>
+            Paramètres : textX (nouvelle position <a href="#textX">X</a> du texte)</br>
+            Change la position <a href="#textX">X</a> du texte par "textX".</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
+        <h3 id="setTextY">setTextY()</h3>
+        <div>
+            Paramètres : textX (nouvelle position <a href="#textY">Y</a> du texte)</br>
+            Change la position <a href="#textY">Y</a> du texte par "textY".</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
         <h3 id="_checkSelection">_checkSelection()</h3>
         <div>
             Paramètres : aucun</br>
@@ -298,13 +341,29 @@
         <div>
             Paramètres : aucun</br>
             Descend le curseur à la ligne d'au dessous.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Elle permet aussi d'assurer la sélection par flèche.</br>
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
+        <h3 id="_cursorLeft">_cursorLeft()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Bouge le curseur vers l'arrière (touche <a href="#leftArrowPressed">flèche</a> gauche).</br>
+            Elle permet aussi d'assurer la sélection par flèche et l'effet Ctrl+flèche.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
+        <h3 id="_cursorRight">_cursorRight()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Bouge le curseur vers l'avant (touche <a href="#rightArrowPressed">flèche</a> droite).</br>
+            Elle permet aussi d'assurer la sélection par flèche et l'effet Ctrl+flèche.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="_cursorTop">_cursorBottom()</h3>
         <div>
             Paramètres : aucun</br>
             Monte le curseur à la ligne d'au dessus.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Elle permet aussi d'assurer la sélection par flèche.</br>
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="_doBackspaceEffet">_doBackspaceEffet()</h3>
         <div>
@@ -347,19 +406,28 @@
             Avant la version 1.3.0, cette fonction s'appelée "_getCursorY".</br>
             Modifié à la <a href="../versions.html">version</a> 1.2.0.
         </div>
+        <h3 id="_getTextDisplaySize">_getTextDisplaySize()</h3>
+        <div>
+            Paramètres : aucun</br>
+            Retourne la taille de l'endroit d'<a href="#display">affichage</a> du texte dans le MText.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
         <h3 id="_getTextHeight">_getTextHeight()</h3>
         <div>
-            Paramètres : generator (générateur de texte)</br>
+            Paramètres : generator (générateur de texte, basiquement à 0)</br>
             Retourne la hauteur du texte en pixel.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Si generator est à 0, generator sera égal à <a href="#getGenerator">getGenerator</a>.</br>
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="_getTextRendered">getTextRendered()</h3>
         <div>
-            Paramètres : generator (générateur de texte), pieces (texte à générer, basiquement à 0)</br>
-            Retourne une liste qui contient les surfaces du texte à générer.</br>
+            Paramètres : generator (générateur de texte, basiquement à 0), pieces (texte à générer, basiquement à 0)</br>
+            Retourne une liste qui contient les surfaces du texte à générer et la coordonnée du texte Y où commence le coupage (utilise si all est False).</br>
             Elle s'occupe aussi d'appliquer les modifications graphiques dû à la <a href="#selection">selection</a>.</br>
+            Cependant, si le texte est hors du MText (trop haut, trop bas ou trop décalé), le rendu n'est pas fait.</br>
+            Si generator est à 0, generator sera égal à <a href="#getGenerator">getGenerator</a>.</br>
             Si pieces est à 0, pieces sera égal à <a href="#getCuttedPiece">getCuttedPiece</a>.</br>
-            Modifié à la <a href="../versions.html">version</a> 1.3.0.
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="_isGettingMouseDown">_isGettingMouseDown()</h3>
         <div>
@@ -386,7 +454,7 @@
             Fonction appelé lorsque le widget est focus est qu'une touche est pressée.</br>
             Reset <a href="#_backspacePressed">_backspacePressed</a> et <a href="#_returnPressed">_returnPressed</a>.</br>
             Cette fonction est héritée de <a href="./mwidget.html#_isKeyGettingDropped">MWidget</a>.</br>
-            Modifié à la <a href="../versions.html">version</a> 1.3.0.
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id = "_isKeyGettingPressed">_isKeyGettingPressed()</h3>
         <div>
@@ -396,7 +464,7 @@
             Cette fonction est utilisé à la place de <h3 id = "#_isTextGettingEntered">_isTextGettingEntered()</h3> pour certains caractères spéciaux (comme le retour à la ligne).</br>
             Elle permet aussi de faire naviguer le curseur avec les flèches et de copier/coller du texte.</br>
             Cette fonction est héritée de <a href="./mwidget.html#_isKeyGettingPressed">MWidget</a>.</br>
-            Modifié à la <a href="../versions.html">version</a> 1.3.0.
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id = "_isNotFocusedAnymore">_isNotFocusedAnymore()</h3>
         <div>
@@ -404,7 +472,7 @@
             Fonction appelé lorsque le widget n'est plus focus.</br>
             Permet de savoir quand le widget n'est plus focus pour reset <a href="#_backspacePressed">backspacePressed</a>, <a href="#_returnPressed">returnPressed</a>, les flèches et la touche contrôle.</br>
             Cette fonction est héritée de <a href="./mwidget.html#_isNotFocusedAnymore">MWidget</a>.</br>
-            Modifié à la <a href="../versions.html">version</a> 1.3.0.
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id = "_isTextGettingEntered">_isTextGettingEntered()</h3>
         <div>
@@ -414,6 +482,14 @@
             Si du texte est <a href="#selection">sélectionné</a>, le texte sélectionné est supprimé et remplacé par "text".</br>
             Cette fonction est héritée de <a href="./mwidget.html#_isTextGettingEntered">MWidget</a>.</br>
             Modifié à la <a href="../versions.html">version</a> 1.3.0.
+        </div>
+        <h3 id="_mouseWheel">_mouseWheel()</h3>
+        <div>
+            Paramètres : rotation (valeur de la rotation de la molette)</br>
+            Fonction appelé lorsque le widget est focus est que l'utilisateur tourne la molette.</br>
+            Permet de faire défiler le texte grâce à <a href="#textY">textY</a>.</br>
+            Cette fonction est héritée de <a href="./mwidget.html#_mouseWheel">MWidget</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="_removeTextAtPos">_removeTextAtPos()</h3>
         <div>
@@ -432,6 +508,13 @@
             Cette fonction est héritée de <a href="./mwidget.html#_renderBeforeHierarchy">MWidget</a>.</br>
             Modifié à la <a href="../versions.html">version</a> 1.3.0.
         </div>
+        <h3 id="_renderTextImage">_renderTextImage()</h3>
+        <div>
+            Paramètres : generator (générateur de texte, basiquement à 0), pieces (texte à générer, basiquement à 0)</br>
+            Retourne la surface du texte à partir de <a href="_getTextRendered">_getTextRendered()</a>.</br>
+            Si generator est à 0, generator sera égal à <a href="#getGenerator">getGenerator</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
         <h3 id="_setCursorIsVisible">_setCursorIsVisible()</h3>
         <div>
             Paramètres : _cursorIsVisible (nouvel valeur de <a href="_cursorIsVisible">_cursorIsVisible</a>)</br>
@@ -445,7 +528,7 @@
             Elle met <a href="_backspacePressedTime">_backspacePressedTime</a> et <a href="#_returnPressedTime">_returnPressedTime</a> à jour et d'ajouter les backspace/retour (avec un premier délai de 0.5 secondes et pleins de délais de 0.05 secondes).</br>
             Elle fait de même avec <a href="_leftArrowPressedTime">leftArrowPressedTime</a> et <a href="#_rightArrowPressedTime">_rightArrowPressedTime</a>.</br>
             Elle s'occupe aussi de faire clignoter le curseur.</br>
-            Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+            Modifié à la <a href="../versions.html">version</a> 1.4.0.
         </div>
 
         <h2>Variables</h2>
@@ -567,6 +650,16 @@
             Si il est égal à 2, le texte est aligné vers le bas.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
+        <h3 id="textX">textX</h3>
+        <div>
+            Coordonnées X du texte dans le MText (donc entre la <a href="./mframe.html">bordure</a> et l'<a href="#display">offset</a>).</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.3.0.
+        </div>
+        <h3 id="textY">textY</h3>
+        <div>
+            Coordonnées Y du texte dans le MText (donc entre la <a href="./mframe.html">bordure</a> et l'<a href="#display">offset</a>).</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.3.0.
+        </div>
         <h3 id="_backspacePressed">_backspacePressed</h3>
         <div>
             Booléen qui indique si la touche backspace est pressée ou non.</br>
@@ -645,6 +738,12 @@
             Nombre de "leftArrow" appliqués au texte.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
         </div>
+        <h3 id="_longestLineSize">_longestLineSize</h3>
+        <div>
+            Taille de la ligne la plus grande rendu dans <a href="#_getTextRendered">_getTextRendered()</a>.</br>
+            Elle sert à définir la valeur la plsu élevé de <a href="#textX">textX</a>.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
+        </div>
         <h3 id="_returnPressed">_returnPressed</h3>
         <div>
             Booléen qui indique si la touche retourn est pressée ou non.</br>
@@ -676,6 +775,11 @@
         <div>
             Nombre de "rightArrow" appliqués au texte.</br>
             Ajouté à la <a href="../versions.html">version</a> 1.0.0.
+        </div>
+        <h3 id="_shiftPressed">_shiftPressed</h3>
+        <div>
+            Booléen qui indique si la touche shift (droite ou gauche) est pressée.</br>
+            Ajouté à la <a href="../versions.html">version</a> 1.4.0.
         </div>
         <h3 id="_topArrowPressed">_topArrowPressed</h3>
         <div>
