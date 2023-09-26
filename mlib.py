@@ -751,6 +751,7 @@ class MText(MFrame):
     def __init__(self, text, x, y, width, height, parent, widgetType = "MText"):
         super().__init__(x, y, width, height, parent, widgetType)
 
+        self.antiAnaliasing = True
         self.cursorPosition = 0
         self.cursorVisible = False
         self.cursorWidth = 2
@@ -1514,6 +1515,8 @@ class MText(MFrame):
     def _getTextRendered(self, all=False, generator=0): #Return a list with all the text rendered
         if generator == 0:
             generator = self.getGenerator()
+
+        antiAnaliasing = self.antiAnaliasing
         
         pieces, addLineToReturn, textY = self.getCuttedText(all=all, generator=generator)
         textYStart = textY[0]
@@ -1537,9 +1540,9 @@ class MText(MFrame):
                     isSelected = True
                     selectionStarted = True
                     if textLength > self.getSelectionStop() + selectionStartOffset: #And end at this line too
-                        textSurface1 = generator.render(piece[:len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset)], False, self.getTextColor())
-                        textSurface2 = generator.render(piece[len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset):len(piece)-(textLength-self.getSelectionStop()+selectionStartOffset)], False, self.getSelectionTextColor())
-                        textSurface3 = generator.render(piece[len(piece)-(textLength-self.getSelectionStop()+selectionStartOffset):], False, self.getTextColor())
+                        textSurface1 = generator.render(piece[:len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset)], antiAnaliasing, self.getTextColor())
+                        textSurface2 = generator.render(piece[len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset):len(piece)-(textLength-self.getSelectionStop()+selectionStartOffset)], antiAnaliasing, self.getSelectionTextColor())
+                        textSurface3 = generator.render(piece[len(piece)-(textLength-self.getSelectionStop()+selectionStartOffset):], antiAnaliasing, self.getTextColor())
                         surfaceSelectionBackground = Surface((textSurface2.get_width(), textSurface2.get_height()), pygame.SRCALPHA)
                         surfaceSelectionBackground.fill(self.getSelectionBackgroundColor())
                         textSurface = Surface((textSurface1.get_width() + textSurface2.get_width() + textSurface3.get_width(), textSurface2.get_height()), pygame.SRCALPHA)
@@ -1550,8 +1553,8 @@ class MText(MFrame):
                         surfaces.append(textSurface)
                         isSelected = False
                     else:
-                        textSurface1 = generator.render(piece[:len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset)], False, self.getTextColor())
-                        textSurface2 = generator.render(piece[len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset):len(piece)-(textLength-self.getSelectionStop())], False, self.getSelectionTextColor())
+                        textSurface1 = generator.render(piece[:len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset)], antiAnaliasing, self.getTextColor())
+                        textSurface2 = generator.render(piece[len(piece)-(textLength-self.getSelectionStart()+selectionStartOffset):len(piece)-(textLength-self.getSelectionStop())], antiAnaliasing, self.getSelectionTextColor())
                         surfaceSelectionBackground = Surface((textSurface2.get_width(), textSurface2.get_height()), pygame.SRCALPHA)
                         surfaceSelectionBackground.fill(self.getSelectionBackgroundColor())
                         textSurface = Surface((textSurface1.get_width() + textSurface2.get_width(), textSurface2.get_height()), pygame.SRCALPHA)
@@ -1561,7 +1564,7 @@ class MText(MFrame):
                         surfaces.append(textSurface)
                 elif isSelected: #Line in the middle of the selection
                     if textLength <= self.getSelectionStop() + selectionStartOffset: #And end at this line too
-                        textSurface1 = generator.render(piece, False, self.getSelectionTextColor())
+                        textSurface1 = generator.render(piece, antiAnaliasing, self.getSelectionTextColor())
                         surfaceSelectionBackground = Surface((textSurface1.get_width(), textSurface1.get_height()), pygame.SRCALPHA)
                         surfaceSelectionBackground.fill(self.getSelectionBackgroundColor())
                         textSurface = Surface((textSurface1.get_width(), textSurface1.get_height()), pygame.SRCALPHA)
@@ -1569,8 +1572,8 @@ class MText(MFrame):
                         textSurface.blit(textSurface1, (0, 0, textSurface1.get_width(), textSurface1.get_height()))
                         surfaces.append(textSurface)
                     else: #End selection in a another line than the first selection position
-                        textSurface1 = generator.render(piece[:len(piece)-(textLength-self.getSelectionStop() + selectionStartOffset)], False, self.getSelectionTextColor())
-                        textSurface2 = generator.render(piece[len(piece)-(textLength-self.getSelectionStop() + selectionStartOffset):], False, self.getTextColor())
+                        textSurface1 = generator.render(piece[:len(piece)-(textLength-self.getSelectionStop() + selectionStartOffset)], antiAnaliasing, self.getSelectionTextColor())
+                        textSurface2 = generator.render(piece[len(piece)-(textLength-self.getSelectionStop() + selectionStartOffset):], antiAnaliasing, self.getTextColor())
                         surfaceSelectionBackground = Surface((textSurface1.get_width(), textSurface1.get_height()), pygame.SRCALPHA)
                         surfaceSelectionBackground.fill(self.getSelectionBackgroundColor())
                         textSurface = Surface((textSurface1.get_width() + textSurface2.get_width(), textSurface2.get_height()), pygame.SRCALPHA)
@@ -1580,7 +1583,7 @@ class MText(MFrame):
                         surfaces.append(textSurface)
                         isSelected = False
             else:
-                textSurface = generator.render(piece, False, self.textColor)
+                textSurface = generator.render(piece, antiAnaliasing, self.textColor)
                 surfaces.append(textSurface)
             i += 1
             textY += textHeight
