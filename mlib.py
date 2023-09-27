@@ -2359,14 +2359,19 @@ class MScrollArea(MFrame):
             if self.getVerticalBar().getVisible():
                 self.getVerticalBar().setVisible(False)
 
+    def reLoad(self):
+        temp = self.widgetToScroll
+        self.widgetToScroll = 0
+        self.setWidgetToScroll(temp)
+
     def setWidgetToScroll(self, widgetToScroll): #Change widgetToScroll
         if self.getWidgetToScroll() != widgetToScroll:
             self.widgetToScroll = widgetToScroll
             if widgetToScroll.getParent() != self:
                 widgetToScroll.setParent(self)
-                self.promoveChild(self.horizontalBar)
-                self.promoveChild(self.verticalBar)
-            widgetToScroll.move(0, 0)
+            self.promoveChild(self.horizontalBar)
+            self.promoveChild(self.verticalBar)
+            widgetToScroll.move(self.getFrameWidth(1), self.getFrameWidth(1))
             self.placeBar()
 
     def _lateUpdate(self, deltaTime): #Function called every frame after event handle
