@@ -1,4 +1,0 @@
--Anti analiasing dans MText
--Comportement de __del__ dans un widget.
--Frame de MScrollArea secondaire
--Rechargement de MScrollArea buggué

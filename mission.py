@@ -46,6 +46,9 @@ def est_parenthese(chaine: str):
 interfaceGraphique = True #Booléen qui indique si la fenêtre graphique doit s'afficher ou non (il est conseillé de laisser à True)
 
 if interfaceGraphique:
+    """L'objectif de cette interface graphique est de créer une partie pour rentrer un texte, une partie afficher pendant l'analyse et une partie qui affiche
+       les résultats sous forme d'image scrollable avec le même design que le croquis présent dans l'énoncé."""
+
     TAILLE = (600, 600) #Taille de la fenêtre graphique
 
     fenetre = display.set_mode(TAILLE) #Définition de la fenêtre python
@@ -196,7 +199,7 @@ if interfaceGraphique:
                 if erreur != "":  #Si il y a une erreur, arrêter la génération
                     break
             
-            if len(pileActuelle) > 0:
+            if len(pileActuelle) > 0 and erreur == "":
                 caseLargeur = 200 #Largeur d'une case du conteneur
                 xCase = conteneurResultat.getWidth() #Position x des éléments dans la case du conteneur
 
